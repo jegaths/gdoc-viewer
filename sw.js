@@ -1,7 +1,7 @@
 // Keeps the app itself available offline. Documents are stored separately,
 // by app.js, in their own cache that survives app updates.
 
-const VERSION = '178456e84e3a';
+const VERSION = 'cef73c4315c5';
 const SHELL = `gdoc-shell-${VERSION}`;
 
 self.addEventListener('install', (event) => {

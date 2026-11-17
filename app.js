@@ -323,7 +323,7 @@ function signInScreen() {
   return `
     <main>
       <div class="empty">
-        <div class="tile">📁</div>
+        <img class="logo" src="icon.svg" alt="" width="84" height="84" />
         <h2>Documents shared with you</h2>
         <p>Sign in with the Google account the group was shared with. Your
           documents are then saved on this phone, so they open without a

@@ -247,6 +247,11 @@ main {
   font-size: 36px;
 }
 
+.empty .logo {
+  display: block;
+  margin: 0 auto 20px;
+}
+
 .empty h2 {
   margin: 0 0 8px;
   font-size: 1.35rem;
