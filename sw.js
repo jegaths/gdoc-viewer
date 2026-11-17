@@ -1,7 +1,7 @@
 // Keeps the app itself available offline. Documents are stored separately,
 // by app.js, in their own cache that survives app updates.
 
-const VERSION = '2a0f2540e276';
+const VERSION = '178456e84e3a';
 const SHELL = `gdoc-shell-${VERSION}`;
 
 self.addEventListener('install', (event) => {
@@ -16,13 +16,24 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
+  // Kept short on purpose: the browser holds back every request from the
+  // page until this finishes.
   event.waitUntil(
     (async () => {
       for (const name of await caches.keys()) {
         if (name.startsWith('gdoc-shell-') && name !== SHELL) await caches.delete(name);
       }
       await self.clients.claim();
-      // Best effort, after the app is already usable.
+    })(),
+  );
+});
+
+// The page asks for the optional files once it is up and running. Best
+// effort: anything missed is fetched, and kept, the first time it is needed.
+self.addEventListener('message', (event) => {
+  if (event.data !== 'store-extras') return;
+  event.waitUntil(
+    (async () => {
       try {
         const list = await (await fetch('precache.json', { cache: 'no-store' })).json();
         const cache = await caches.open(SHELL);
@@ -30,7 +41,7 @@ self.addEventListener('activate', (event) => {
           if (!(await cache.match(url))) await cache.add(url).catch(() => {});
         }
       } catch {
-        // Offline right now; these are fetched on demand instead.
+        // Offline right now.
       }
     })(),
   );

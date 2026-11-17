@@ -621,6 +621,10 @@ document.addEventListener('visibilitychange', () => {
 async function start() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch((error) => console.warn('Offline support unavailable', error));
+    // Once it's running, have it quietly store the rarely needed files too.
+    navigator.serviceWorker.ready
+      .then((registration) => setTimeout(() => registration.active?.postMessage('store-extras'), 5000))
+      .catch(() => {});
   }
   await refreshSaved();
 
