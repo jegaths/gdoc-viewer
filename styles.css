@@ -1,0 +1,378 @@
+:root {
+  color-scheme: light dark;
+  --bg: #f4fbf8;
+  --surface: #ffffff;
+  --line: #d5e3de;
+  --text: #16201d;
+  --muted: #55655f;
+  --accent: #0f766e;
+  --on-accent: #ffffff;
+  --accent-soft: #d3ece6;
+  --danger: #b3261e;
+  --notice: #e3edf6;
+  --radius: 16px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e1513;
+    --surface: #18211e;
+    --line: #2c3a36;
+    --text: #e3ece8;
+    --muted: #9fb0aa;
+    --accent: #5fd3c4;
+    --on-accent: #00382f;
+    --accent-soft: #1d3a35;
+    --danger: #ffb4ab;
+    --notice: #1f2a33;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: calc(56px + var(--safe-top));
+  padding: var(--safe-top) 8px 0;
+  background: var(--bg);
+}
+
+.bar h1 {
+  flex: 1;
+  min-width: 0;
+  margin: 0 8px;
+  font-size: 1.3rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.icon-button {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  /* Some of these are links; they should look like the buttons beside them. */
+  color: inherit;
+  text-decoration: none;
+}
+
+.icon-button:active {
+  background: var(--accent-soft);
+}
+
+.icon-button:disabled {
+  opacity: 0.3;
+}
+
+.icon-button svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 8px 16px calc(32px + var(--safe-bottom));
+}
+
+.status {
+  margin: 0 4px 12px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.notice {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--notice);
+  font-size: 0.95rem;
+}
+
+.notice p {
+  flex: 1;
+  margin: 0;
+}
+
+.text-button {
+  flex: none;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.card,
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: left;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card {
+  margin-bottom: 10px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.card:active,
+.row:active {
+  background: var(--accent-soft);
+}
+
+.tile {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  font-size: 26px;
+  background: color-mix(in srgb, var(--tint, var(--accent)) 16%, transparent);
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+}
+
+.label strong {
+  display: -webkit-box;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 1.05rem;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.label span {
+  display: block;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  fill: var(--muted);
+}
+
+.row {
+  padding: 10px 4px;
+  border: 0;
+  border-radius: 12px;
+  background: none;
+}
+
+.thumb {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.empty {
+  padding: 18vh 16px 0;
+  text-align: center;
+}
+
+.empty .tile {
+  margin: 0 auto 16px;
+  width: 72px;
+  height: 72px;
+  font-size: 36px;
+}
+
+.empty h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.empty p {
+  max-width: 34ch;
+  margin: 0 auto 24px;
+  color: var(--muted);
+}
+
+.primary {
+  padding: 12px 22px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+}
+
+.primary:disabled {
+  opacity: 0.6;
+}
+
+.hint {
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.account {
+  margin: 28px 4px 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.account .text-button {
+  display: block;
+  margin: 4px 0 0 -10px;
+}
+
+/* Viewer: documents on black, like the app. */
+body.viewing {
+  background: #000;
+  color: #fff;
+}
+
+body.viewing .bar {
+  background: #000;
+}
+
+.pages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-height: calc(100vh - 140px);
+  padding-bottom: calc(72px + var(--safe-bottom));
+}
+
+.pages img,
+.pages canvas {
+  display: block;
+  width: 100%;
+  max-width: 900px;
+  height: auto;
+  background: #fff;
+}
+
+.pages .page {
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+}
+
+.pages .message {
+  max-width: 32ch;
+  margin: 22vh auto 0;
+  padding: 0 24px;
+  color: #c9d1ce;
+  text-align: center;
+}
+
+.pager {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px calc(6px + var(--safe-bottom));
+  background: #000;
+  color: #fff;
+}
+
+.pager span {
+  color: #c9d1ce;
+  font-size: 0.95rem;
+}
+
+#toast {
+  position: fixed;
+  right: 16px;
+  bottom: calc(24px + var(--safe-bottom));
+  left: 16px;
+  z-index: 5;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: #24302c;
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .spin {
+    animation: spin 0.9s linear infinite;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
